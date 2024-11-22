@@ -1,0 +1,56 @@
+{
+    "name": "per-seo/forwarded-proto",
+    "type": "library",
+    "description": "X-Forwarded-Proto for Slim 4. This Middleware check if the X-Forwarded-Proto header is present and add correct schema in the request object.",
+    "keywords": [
+        "x-forwarded-proto",
+        "slim",
+        "slim4"
+    ],
+    "homepage": "https://github.com/per-seo/forwarded-proto",
+    "license": "MIT",
+    "require": {
+        "php": ">=7.4",
+        "psr/http-server-middleware": "^1"
+    },
+    "require-dev": {
+        "friendsofphp/php-cs-fixer": ">=2",
+        "overtrue/phplint": "^2",
+        "phpstan/phpstan": ">=1",
+        "phpunit/phpunit": "^11.4",
+        "slim/psr7": "^1",
+        "slim/slim": "^4",
+        "squizlabs/php_codesniffer": "^3"
+    },
+    "scripts": {
+        "check": [
+            "@lint",
+            "@cs:check",
+            "@sniffer:check",
+            "@phpstan",
+            "@test:coverage"
+        ],
+        "cs:check": "php-cs-fixer fix --dry-run --format=txt --verbose --diff --diff-format=udiff --config=.cs.php",
+        "cs:fix": "php-cs-fixer fix --config=.cs.php",
+        "lint": "phplint ./ --exclude=vendor --no-interaction --no-cache",
+        "phpstan": "phpstan analyse src tests --level=max -c phpstan.neon --no-progress --ansi",
+        "sniffer:check": "phpcs --standard=phpcs.xml",
+        "sniffer:fix": "phpcbf --standard=phpcs.xml",
+        "test": "phpunit --configuration phpunit.xml --do-not-cache-result --colors=always",
+        "test:coverage": "phpunit --configuration phpunit.xml --do-not-cache-result --colors=always --coverage-clover build/logs/clover.xml --coverage-html build/coverage"
+    },
+    "autoload": {
+        "psr-4": {
+            "PerSeo\\Middleware\\ForwardedProto\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "PerSeo\\Middleware\\ForwardedProto\\Test\\": "tests/"
+        }
+    },
+    "config": {
+        "sort-packages": true,
+        "process-timeout": 0
+    }
+}
